@@ -26,7 +26,7 @@ def get_key(key):
         return jsonify(error="Key doesn't exists"),400
     time_left=CACHE[key][1]-time.time() 
     
-    return jsonify(data=CACHE[key][0], time_remaining=f"{time_left:0.2f}")
+    return jsonify(data=CACHE[key][0], time_remaining=f"{time_left:0.2f} sec")
 
 @app1.get("/cache/size")
 def get_size():
