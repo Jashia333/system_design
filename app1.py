@@ -31,8 +31,7 @@ def get_key(key):
 @app1.get("/cache/size")
 def get_size():
     # This line REBUILDS the cache with only the valid items, effectively deleting the expired ones.
-
-    clear_cache()
+    clear_cache() 
     return jsonify(keys_length=len(CACHE))
 
 @app1.get("/cache/show")
