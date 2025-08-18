@@ -17,5 +17,9 @@ def test_3():
     assert bucket.allow_req(req_cap=2)==True
     assert bucket.allow_req(req_cap=3)==True
 
+def test_4():
+    bucket=my_bucket(current_cap=10, drop_rate=10)
+    assert bucket.allow_req(req_cap=10)==True
+
 
 
