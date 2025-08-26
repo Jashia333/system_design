@@ -1,3 +1,4 @@
+from tabulate import tabulate
 import time
 
 class my_bucket:
@@ -15,9 +16,21 @@ class my_bucket:
             self.check_time = now
 
     def allow_req(self, req_cap=1):
+        before_fill = self.current_cap
         self.fill_bucket()
-        req_cap = float(req_cap)
-        if self.current_cap >= req_cap:
+        after_fill = self.current_cap
+        allowed = after_fill >= req_cap
+        if allowed:
             self.current_cap -= req_cap
-            return True
-        return False
+
+        # Build a small table of values
+        table = [
+            ["Before Fill", round(before_fill, 2)],
+            ["After Fill", round(after_fill, 2)],
+            ["Req Cap", req_cap],
+            ["Decision", "✅ Allowed" if allowed else "❌ Denied"],
+            ["Remaining Cap", round(self.current_cap, 2)]
+        ]
+        print(tabulate(table, headers=["Metric", "Value"], tablefmt="fancy_grid"))
+
+        return allowed
