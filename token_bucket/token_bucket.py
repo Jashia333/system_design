@@ -15,9 +15,7 @@ class my_bucket:
             self.check_time = now
 
     def allow_req(self, req_cap=1):
-        print(f"current cap b4 fill {self.current_cap}")
         self.fill_bucket()
-        print(f"current cap after fill {self.current_cap}")
         req_cap = float(req_cap)
         if self.current_cap >= req_cap:
             self.current_cap -= req_cap
